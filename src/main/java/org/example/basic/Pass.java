@@ -1,9 +1,8 @@
 package org.example.basic;
 
-import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Queue;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Pass {
@@ -20,7 +19,10 @@ public class Pass {
 //        {2,5,7,3,2,9},
 //        {1,3,6,7,9,8},});
 
- solveSuperMarketQueue(new int[] { 3,7,2,6,5,3,4,7,4,5,1,6,4,5,3,3,3,6,5,1,4,1,1}, 6);
+// solveSuperMarketQueue(new int[] { 3,7,2,6,5,3,4,7,4,5,1,6,4,5,3,3,3,6,5,1,4,1,1}, 6);
+//   sumCharacters("abgtrweweewe");
+//   sumOfAngles(4);
+        System.out.println(calculateAge(2011, 2012));
     }
 
     public class Util {
@@ -116,12 +118,31 @@ public class Pass {
     }
 
     public static int solveSuperMarketQueue(int[] customers, int n) {
-      int[]result = new int[n];
-      for (int i = 0;i< customers.length;i++){
-         result[0] = result[0]+customers[i];
-          Arrays.sort(result);
-      }
-      return result[n-1];
+     int[]cashDesks  = new int[n];
+     for (int i =0;i< customers.length;i++){
+         cashDesks[0]+=customers[i];
+         Arrays.sort(cashDesks);
+     }
+     return cashDesks[n-1];
     }
 
+    public static Map<Character,Integer> sumCharacters(String str){
+        Map<Character, Integer> collect = str.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.toMap(c -> c, c -> 1, Integer::sum));
+      //  System.out.println(collect);
+        double sin = Math.cos(180);
+        System.out.println(sin);
+        return collect;
+    }
+    public static int sumOfAngles(int n) {
+        return 180*(n-1);
+    }
+
+    public static String calculateAge(int birth, int yearTo) {
+        final int age = yearTo-birth;
+        return age == 0 ? "You were born this very year!" :
+                age > 0 ? String.format("You are %d year%s old.",age,age==1?"":"s") :
+                String.format("You will be born in %d year%s.",Math.abs(age),Math.abs(age) == 1 ? "":"s");
+    }
 }
